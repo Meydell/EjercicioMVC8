@@ -1,0 +1,58 @@
+﻿@model EjercicioMVC8.Models.Estadia
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Estadia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Entrada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Entrada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salida)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salida)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cita)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cita)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paciente.Nombres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paciente.Nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Unidad.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Unidad.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

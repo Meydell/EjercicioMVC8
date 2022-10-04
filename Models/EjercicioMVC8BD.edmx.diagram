@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c722a852c1bd4adfbbc193a8f9a9c15d" Name="Diagram1" >
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Unidad" Width="1.5" PointX="2.5" PointY="2.875" />
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Planta" Width="1.5" PointX="0.5" PointY="2.875" />
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Doctor" Width="1.5" PointX="4.375" PointY="0.625" />
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Paciente" Width="1.5" PointX="8.25" PointY="2.625" />
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Atencion" Width="1.5" PointX="6.375" PointY="1.25" />
+        <EntityTypeShape EntityType="EjercicioMVC8BD.Estadia" Width="1.5" PointX="5" PointY="4.375" />
+        <AssociationConnector Association="EjercicioMVC8BD.PlantaUnidad" />
+        <AssociationConnector Association="EjercicioMVC8BD.DoctorUnidad" />
+        <AssociationConnector Association="EjercicioMVC8BD.DoctorAtencion" />
+        <AssociationConnector Association="EjercicioMVC8BD.PacienteAtencion" />
+        <AssociationConnector Association="EjercicioMVC8BD.PacienteEstadia" />
+        <AssociationConnector Association="EjercicioMVC8BD.UnidadEstadia" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

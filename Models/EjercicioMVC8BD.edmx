@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EjercicioMVC8BD.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EjercicioMVC8BDStoreContainer">
+    <EntitySet Name="Unidades" EntityType="EjercicioMVC8BD.Store.Unidades" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Plantas" EntityType="EjercicioMVC8BD.Store.Plantas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Doctores" EntityType="EjercicioMVC8BD.Store.Doctores" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Pacientes" EntityType="EjercicioMVC8BD.Store.Pacientes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Atenciones" EntityType="EjercicioMVC8BD.Store.Atenciones" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Estadias" EntityType="EjercicioMVC8BD.Store.Estadias" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PlantaUnidad" Association="EjercicioMVC8BD.Store.PlantaUnidad">
+      <End Role="Planta" EntitySet="Plantas" />
+      <End Role="Unidad" EntitySet="Unidades" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorUnidad" Association="EjercicioMVC8BD.Store.DoctorUnidad">
+      <End Role="Doctor" EntitySet="Doctores" />
+      <End Role="Unidad" EntitySet="Unidades" />
+    </AssociationSet>
+    <AssociationSet Name="DoctorAtencion" Association="EjercicioMVC8BD.Store.DoctorAtencion">
+      <End Role="Doctor" EntitySet="Doctores" />
+      <End Role="Atencion" EntitySet="Atenciones" />
+    </AssociationSet>
+    <AssociationSet Name="PacienteAtencion" Association="EjercicioMVC8BD.Store.PacienteAtencion">
+      <End Role="Paciente" EntitySet="Pacientes" />
+      <End Role="Atencion" EntitySet="Atenciones" />
+    </AssociationSet>
+    <AssociationSet Name="PacienteEstadia" Association="EjercicioMVC8BD.Store.PacienteEstadia">
+      <End Role="Paciente" EntitySet="Pacientes" />
+      <End Role="Estadia" EntitySet="Estadias" />
+    </AssociationSet>
+    <AssociationSet Name="UnidadEstadia" Association="EjercicioMVC8BD.Store.UnidadEstadia">
+      <End Role="Unidad" EntitySet="Unidades" />
+      <End Role="Estadia" EntitySet="Estadias" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Unidades">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Codigo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PlantaId" Type="int" Nullable="false" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plantas">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CantUnidades" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Doctores">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Especialidad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Pacientes">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ISS" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Edad" Type="int" Nullable="false" />
+    <Property Name="Telefono" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Atenciones">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" Nullable="false" />
+    <Property Name="Sintoma" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Diagnostico" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Medicamentos" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="DoctorId" Type="int" Nullable="false" />
+    <Property Name="PacienteId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estadias">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Entrada" Type="datetime" Nullable="false" />
+    <Property Name="Salida" Type="datetime" Nullable="false" />
+    <Property Name="Cita" Type="datetime" Nullable="true" />
+    <Property Name="PacienteId" Type="int" Nullable="false" />
+    <Property Name="UnidadId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="PlantaUnidad">
+    <End Role="Planta" Type="EjercicioMVC8BD.Store.Plantas" Multiplicity="1" />
+    <End Role="Unidad" Type="EjercicioMVC8BD.Store.Unidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Planta">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Unidad">
+        <PropertyRef Name="PlantaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorUnidad">
+    <End Role="Doctor" Type="EjercicioMVC8BD.Store.Doctores" Multiplicity="1" />
+    <End Role="Unidad" Type="EjercicioMVC8BD.Store.Unidades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Unidad">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DoctorAtencion">
+    <End Role="Doctor" Type="EjercicioMVC8BD.Store.Doctores" Multiplicity="1" />
+    <End Role="Atencion" Type="EjercicioMVC8BD.Store.Atenciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Doctor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Atencion">
+        <PropertyRef Name="DoctorId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PacienteAtencion">
+    <End Role="Paciente" Type="EjercicioMVC8BD.Store.Pacientes" Multiplicity="1" />
+    <End Role="Atencion" Type="EjercicioMVC8BD.Store.Atenciones" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Atencion">
+        <PropertyRef Name="PacienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PacienteEstadia">
+    <End Role="Paciente" Type="EjercicioMVC8BD.Store.Pacientes" Multiplicity="1" />
+    <End Role="Estadia" Type="EjercicioMVC8BD.Store.Estadias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estadia">
+        <PropertyRef Name="PacienteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UnidadEstadia">
+    <End Role="Unidad" Type="EjercicioMVC8BD.Store.Unidades" Multiplicity="1" />
+    <End Role="Estadia" Type="EjercicioMVC8BD.Store.Estadias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unidad">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estadia">
+        <PropertyRef Name="UnidadId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EjercicioMVC8BD" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="EjercicioMVC8BDContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Unidades" EntityType="EjercicioMVC8BD.Unidad" />
+          <EntitySet Name="Plantas" EntityType="EjercicioMVC8BD.Planta" />
+          <EntitySet Name="Doctores" EntityType="EjercicioMVC8BD.Doctor" />
+          <EntitySet Name="Pacientes" EntityType="EjercicioMVC8BD.Paciente" />
+          <EntitySet Name="Atenciones" EntityType="EjercicioMVC8BD.Atencion" />
+          <EntitySet Name="Estadias" EntityType="EjercicioMVC8BD.Estadia" />
+          <AssociationSet Name="PlantaUnidad" Association="EjercicioMVC8BD.PlantaUnidad">
+            <End Role="Planta" EntitySet="Plantas" />
+            <End Role="Unidad" EntitySet="Unidades" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorUnidad" Association="EjercicioMVC8BD.DoctorUnidad">
+            <End Role="Doctor" EntitySet="Doctores" />
+            <End Role="Unidad" EntitySet="Unidades" />
+          </AssociationSet>
+          <AssociationSet Name="DoctorAtencion" Association="EjercicioMVC8BD.DoctorAtencion">
+            <End Role="Doctor" EntitySet="Doctores" />
+            <End Role="Atencion" EntitySet="Atenciones" />
+          </AssociationSet>
+          <AssociationSet Name="PacienteAtencion" Association="EjercicioMVC8BD.PacienteAtencion">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Atencion" EntitySet="Atenciones" />
+          </AssociationSet>
+          <AssociationSet Name="PacienteEstadia" Association="EjercicioMVC8BD.PacienteEstadia">
+            <End Role="Paciente" EntitySet="Pacientes" />
+            <End Role="Estadia" EntitySet="Estadias" />
+          </AssociationSet>
+          <AssociationSet Name="UnidadEstadia" Association="EjercicioMVC8BD.UnidadEstadia">
+            <End Role="Unidad" EntitySet="Unidades" />
+            <End Role="Estadia" EntitySet="Estadias" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Unidad">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="Codigo" Type="String" Nullable="false" />
+          <NavigationProperty Name="Planta" Relationship="EjercicioMVC8BD.PlantaUnidad" FromRole="Unidad" ToRole="Planta" />
+          <Property Name="PlantaId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="EjercicioMVC8BD.DoctorUnidad" FromRole="Unidad" ToRole="Doctor" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estadias" Relationship="EjercicioMVC8BD.UnidadEstadia" FromRole="Unidad" ToRole="Estadia" />
+        </EntityType>
+        <EntityType Name="Planta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" />
+          <Property Name="CantUnidades" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Unidades" Relationship="EjercicioMVC8BD.PlantaUnidad" FromRole="Planta" ToRole="Unidad" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="Especialidad" Type="String" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Unidades" Relationship="EjercicioMVC8BD.DoctorUnidad" FromRole="Doctor" ToRole="Unidad" />
+          <NavigationProperty Name="Atenciones" Relationship="EjercicioMVC8BD.DoctorAtencion" FromRole="Doctor" ToRole="Atencion" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" />
+          <Property Name="ISS" Type="String" Nullable="false" />
+          <Property Name="Edad" Type="Int32" Nullable="false" />
+          <Property Name="Telefono" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Atenciones" Relationship="EjercicioMVC8BD.PacienteAtencion" FromRole="Paciente" ToRole="Atencion" />
+          <NavigationProperty Name="Estadias" Relationship="EjercicioMVC8BD.PacienteEstadia" FromRole="Paciente" ToRole="Estadia" />
+        </EntityType>
+        <EntityType Name="Atencion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="Sintoma" Type="String" Nullable="false" />
+          <Property Name="Diagnostico" Type="String" Nullable="false" />
+          <Property Name="Medicamentos" Type="String" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="EjercicioMVC8BD.DoctorAtencion" FromRole="Atencion" ToRole="Doctor" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Paciente" Relationship="EjercicioMVC8BD.PacienteAtencion" FromRole="Atencion" ToRole="Paciente" />
+          <Property Name="PacienteId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estadia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Entrada" Type="DateTime" Nullable="false" />
+          <Property Name="Salida" Type="DateTime" Nullable="false" />
+          <Property Name="Cita" Type="DateTime" Nullable="true" />
+          <NavigationProperty Name="Paciente" Relationship="EjercicioMVC8BD.PacienteEstadia" FromRole="Estadia" ToRole="Paciente" />
+          <Property Name="PacienteId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Unidad" Relationship="EjercicioMVC8BD.UnidadEstadia" FromRole="Estadia" ToRole="Unidad" />
+          <Property Name="UnidadId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PlantaUnidad">
+          <End Type="EjercicioMVC8BD.Planta" Role="Planta" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Unidad" Role="Unidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unidad">
+              <PropertyRef Name="PlantaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DoctorUnidad">
+          <End Type="EjercicioMVC8BD.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Unidad" Role="Unidad" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Unidad">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DoctorAtencion">
+          <End Type="EjercicioMVC8BD.Doctor" Role="Doctor" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Atencion" Role="Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Atencion">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PacienteAtencion">
+          <End Type="EjercicioMVC8BD.Paciente" Role="Paciente" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Atencion" Role="Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Atencion">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PacienteEstadia">
+          <End Type="EjercicioMVC8BD.Paciente" Role="Paciente" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Estadia" Role="Estadia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estadia">
+              <PropertyRef Name="PacienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UnidadEstadia">
+          <End Type="EjercicioMVC8BD.Unidad" Role="Unidad" Multiplicity="1" />
+          <End Type="EjercicioMVC8BD.Estadia" Role="Estadia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unidad">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estadia">
+              <PropertyRef Name="UnidadId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EjercicioMVC8BDStoreContainer" CdmEntityContainer="EjercicioMVC8BDContainer">
+    <EntitySetMapping Name="Unidades">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Unidad)">
+        <MappingFragment StoreEntitySet="Unidades">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="PlantaId" ColumnName="PlantaId" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Plantas">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Planta)">
+        <MappingFragment StoreEntitySet="Plantas">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="CantUnidades" ColumnName="CantUnidades" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Doctores">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Doctor)">
+        <MappingFragment StoreEntitySet="Doctores">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Paciente)">
+        <MappingFragment StoreEntitySet="Pacientes">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="ISS" ColumnName="ISS" />
+          <ScalarProperty Name="Edad" ColumnName="Edad" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Atenciones">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Atencion)">
+        <MappingFragment StoreEntitySet="Atenciones">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Sintoma" ColumnName="Sintoma" />
+          <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+          <ScalarProperty Name="Medicamentos" ColumnName="Medicamentos" />
+          <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+          <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estadias">
+      <EntityTypeMapping TypeName="IsTypeOf(EjercicioMVC8BD.Estadia)">
+        <MappingFragment StoreEntitySet="Estadias">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Entrada" ColumnName="Entrada" />
+          <ScalarProperty Name="Salida" ColumnName="Salida" />
+          <ScalarProperty Name="Cita" ColumnName="Cita" />
+          <ScalarProperty Name="PacienteId" ColumnName="PacienteId" />
+          <ScalarProperty Name="UnidadId" ColumnName="UnidadId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
